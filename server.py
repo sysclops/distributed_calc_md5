@@ -1,9 +1,9 @@
 
 import socket
 import threading
+import multiprocessing
 
-
-class ClientThread(threading.Thread):
+class ClientProcess(multiprocessing.Process):
         '''
         A single thread of the clients
 
@@ -12,7 +12,7 @@ class ClientThread(threading.Thread):
         '''
 
 	def __init__(self, clientAddress, clientsocket):
-		threading.Thread.__init__(self)
+		multiprocessing.Process.__init__(self)
 		self.csocket = clientsocket
 		print ("New connection added: ", clientAddress)
         '''
@@ -20,7 +20,7 @@ class ClientThread(threading.Thread):
         '''
 	def run(self):
 		print ("Connection from : ", clientAddress)
-		hash = "EC9C0F7EDCC18A98B1F31853B1813301"
+		hash = "b5a1382b577b8c190031534841b70dd0"
 		per = 500000
 
 		last = 0
@@ -54,5 +54,5 @@ print("Waiting for client request..")
 while True:
 	server.listen(1)
 	clientsock, clientAddress = server.accept()
-	newthread = ClientThread(clientAddress, clientsock)
+	newthread = ClientProcess(clientAddress, clientsock)
 	newthread.start()

@@ -26,7 +26,7 @@ def thread_func(start, end, hash):
         if new_hash == hash:
             my_socket.send("String was found: " + string)
             break
-    print mid + "\n" + t.getName() + " has just finished!"
+    print mid + "\n" + str(multiprocessing.current_process()) + " has just finished!"
 
 '''
 Encrpyting a string with MD5
@@ -58,7 +58,7 @@ while True:
     list = []
     length = 5
     for i in range(length):
-        t = threading.Thread(target=thread_func, args=(start*(i+1)/length, (end*(i+1))/length, my_hash))
+        t = multiprocessing.Process(target=thread_func, args=(start*(i+1)/length, (end*(i+1))/length, my_hash))
         list.append(t)
 
     for t in list:
