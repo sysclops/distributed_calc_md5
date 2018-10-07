@@ -6,22 +6,36 @@ import multiprocessing
 IP = "127.0.0.1"
 PORT = 8080
 
+'''
+The function each thread runs
 
+Attributes:
+    :start: Start of the range
+    :end: End of the range
+    :hash: Original hash
+
+'''
 def thread_func(start, end, hash):
 
     for num in range(start, end):
         string = str(num)
         while len(string) < 10:
             string = "0" + string
-        new_hash = encode_md5(string)
+        new_hash = encrypt_md5(string)
         mid = string
         if new_hash == hash:
             my_socket.send("String was found: " + string)
             break
     print mid + "\n" + t.getName() + " has just finished!"
 
+'''
+Encrpyting a string with MD5
 
-def encode_md5(string):
+Attributes:
+    :string: The string which we want to encrypt
+'''
+
+def encrypt_md5(string):
     hash = md5()
     hash.update(string.encode('utf-8'))
     return hash.hexdigest()

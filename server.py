@@ -4,11 +4,20 @@ import threading
 
 
 class ClientThread(threading.Thread):
+        '''
+        A single thread of the clients
+
+        Attributes:
+        :csocket: The client socket
+        '''
+
 	def __init__(self, clientAddress, clientsocket):
 		threading.Thread.__init__(self)
 		self.csocket = clientsocket
 		print ("New connection added: ", clientAddress)
-
+        '''
+        The function that runs through each connected client
+        '''
 	def run(self):
 		print ("Connection from : ", clientAddress)
 		hash = "EC9C0F7EDCC18A98B1F31853B1813301"
